@@ -1,7 +1,11 @@
 from PIL import Image
+#Use the following code to execute this:
+#python3 ./OCR-OPencv.py --image ./123.jpeg
+
 import pytesseract
 import argparse
 import cv2
+
 import os
  
 # construct the argument parse and parse the arguments
