@@ -13,7 +13,7 @@ recog_text=[]
 
 for imgBlob in imageBlobs:
     im=Image.open(io.BytesIO(imgBlob))
-    text=pytesseract.image_to_string(im,lang='eng',config='-c preserve_interword_spaces=1 --oem 1 --psm 6')
+    text=pytesseract.image_to_string(im,lang='eng',config='-c preserve_interword_spaces=1 --oem 1 --psm 6 ')
     text= text.replace('\n','')
     recog_text.append(text)
 print(recog_text)
