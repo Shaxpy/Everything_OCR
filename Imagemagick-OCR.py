@@ -3,7 +3,7 @@ import pytesseract
 import io
 from wand.image import Image as wi
 pdfImage=wi(filename="2.png",resolution=300)
-#if needed to be used as pdf reader---
+#if needed to be used as pdf reader--
 #pdfImage=pdf.convert("jpeg")
 imageBlobs=[]
 for img in pdfImage.sequence:
