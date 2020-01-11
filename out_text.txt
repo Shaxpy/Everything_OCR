@@ -1,0 +1,531 @@
+The Ninth International Conference on Electronic Measurement & Instruments
+
+ICEMI’2009
+
+Design Wireless Multi-sensor Fire Detection and Alarm System Based on ARM
+
+Haibing Hu Gang Wang Qixing Zhang Jinjun Wang Jun Fang Yongming Zhang
+(State Key Laboratory of Fire Science China University of Science and Technology, Hefei 230027, China)
+E-mail: zhangym@ustc.edu.cn
+
+Abstract- The system uses nRF2401 for short-range wireless
+
+communications, GPRS for long-distance _ wireless
+communications, ARM9 for center console, Wireless
+Multi-sensor Fire Detector for node, and BP algorithm is used
+for judging the probability of fire. Wireless Multi-sensor Fire
+Detector is formed of the low-power electrochemical carbon
+monoxide sensor, photoelectric smoke detector and
+semiconductor temperature sensor. BP algorithm program is
+embedded in the S3C2440A ARM. The samples of BP algorithm
+were derived from the fire detection standard room of the State
+Key Laboratory of Fire Science of China. Center console uses
+Em GIS(embedded GIS) to show where the fire break out and
+uses GPRS to transmit SMS to the fire command center. The
+system is low false alarm rate, low cost, fast response and
+convenient to install.
+
+Key words-ARM9; Multi-sensor fire detector; Em GIS;
+nRF 2401; GPRS; BP algorithm
+
+I INTRODUCTION
+
+Fire brings great harm to the country's economic and
+social stability, detecting the location of a fire timely and
+accurately is an effective way to prevent or mitigate lose.
+The current fire detection and alarm system use the two
+bus for connecting Smoke temperature composite fire
+detector and central console. It has anti-interference, high
+reliability, etc., It has been widely used in society and
+played an important role in Socio-economic, national
+security. But it is high cost, design, construction and
+maintenance is complex. So people invented the wireless
+fire detection and alarm system. Recently, wireless fire
+detection and alarm system has been rapid development.
+Has Emerge in the wireless temperature, smoke, smoke
+temperature composite fire detection and alarm system.
+The most influential wireless fire detection and alarm
+system is invented by ITI Company in the United States.
+The system uses temperature detectors and photoelectric
+smoke detectors to for the nodes, the central monitoring
+and alarm center is composed of the CS-4000, a
+computer and a printer. The communication distance of
+the system in open space is 600 meters, the working
+frequency is 319.5MHz, the life of temperature detector
+is 2 years when using 9V lithium battery for power
+supply, the life of photoelectric smoke detector is 6.5
+years when using two 3V lithium batteries for power
+supply. This technology currently is the world's most
+advanced wireless alarm technology. However, the high
+cost of such a system is not conducive to universal
+
+978-1-4244-3864-8/09/$25.00 ©2009 IEEE
+
+application in the society and it use single parameter to
+judge whether a fire breaks out, which causes high false
+alarm rate of fire. To solve these problems, developing a
+universal wireless fire detection and alarm system which
+has low cost and low false alarm rate is very meaningful.
+Therefore, we must R&D a special system like the
+Wireless Multi-sensor Fire Detection and Alarm System
+Based on ARM. The center console of this system is
+made up of the ARM9, GIS software, nRF2401 and
+GPRS modules; Wireless Multi-sensor Fire Detector is
+formed of low-power microcontroller, three kinds of
+sensors and nRF2401 module. The structure diagram of
+this system is shown in Fig.1. This paper is organized as
+follows. In section 2, hardware design, include design the
+hardware of the wireless multi-sensor fire detector and
+the center console. In section 3, software design, include
+design the software of the wireless multi-sensor fire
+detector and the center consol. The conclusion is made in
+
+section 4. _
+ss
+
+Center console.
+
+ 
+
+Wireless Fire Detector Wireless Fire Detector
+
+EWN EWN EWN
+
+T senso1 Smoke senso1 T senso1 Smoke senso1 T sensor Smoke senso
+
+CO sensor CO senso1 CO sensor
+
+Fig.1 The Structure diagram of Wireless Multi-sensor Fire Detection
+and Alarm System Based on ARM
+
+Il HARDWARE DESIGN
+
+The hardware of this system includes wireless
+multi-sensor fire detectors and center console. Wireless
+multi-sensor fire detector is used for collecting,
+processing, sending and receiving data, which consists of
+the MSP430 microcontroller, temperature sensor, CO
+sensor, smoke detector, signal amplifier and power, etc.;
+Center console is used for receiving and sending data,
+according to received data, query Em GIS database and
+display the location of the fire on the map of the building,
+and finally through the sound and light to alarm, at the
+same time, use the GPRS module to send SMS to the fire
+command center. It consists of ARM9 panel, GPRS
+module and alarm etc.
+
+2.1 Design of Wireless Multi-sensor Fire Detector
+
+Wireless multi-sensor fire detector mainly consists of
+
+3-285
+
+Wireless Fire DetectorThe Ninth International Conference on Electronic Measurement & Instruments
+
+MCU, 4-way analog switches, temperature sensor, CO
+sensor, smoke detector and wireless communication
+modules (Fig.2). MCU use — ultralow-power
+microcontroller MSP430F149, which is the industry's
+ultralow-power MCU, low supply-voltage range: +1.8 V
+~ +3.6 V, The current consumption of real-time clock 1s
+only 0.1uA in standby mode and 280uA (1MHz) in
+active mode, from the sleep to wake up to the normal
+work only takes 6us, it also has 8-channel 12-bit A / D,
+16 =< 16-bit hardware multiplier. The 4-way analog
+switch use MAX4678, it can be a single power supply
+(+2.7 V ~+11 V), temperature sensor use MA X6608, it
+is a low-power and analog output temperature sensor,
+operating voltage can be as low as 1.8V, operating
+current: 15uA, the accuracy: +0.7°C. Smoke Detector is
+composed of an infrared light emitting diode and an
+infrared light receiver diode. CO sensor use 4CO-500,
+the sensitivity: 0.07 + 0.015mA/ppm, the resolution:
+I ppm, it has a high linearity and good stability and so on.
+Power is monitored by MCU's built-in A / D Acquisition.
+RS232 interface chip use SP3220, it is a low-power
+RS232 driver chips, the supply voltage: +3.3 V ~ +5 V,
+low-power current consumption: IuA, in low-power
+state, it can still transmit data. Wireless data transmission
+module use low-power nRF2401 module, the module
+power supply voltage: 1.9 - 3.6V, in the standby mode
+only 1A, emission current is 12.3mA, receive current is
+11.3mA. And each chip can be set 40-bit address through
+software, the built-in CRC error correction, error
+detection circuit and hardware and agreement, the
+development of software is very easily. Using the 3.7V,
+2000mAH lithium battery as power supply, in order to
+extend the service life, when MSP430F 149 set in LPM3
+mode, in this mode, work current is about 16uA, the
+service life is about 5 years. Monitoring power supply is
+necessary in order to facilitate the maintenance of the
+power, the results will be transmit through a wireless
+network to center console, if the power supply voltage is
+too low ,the alarm will in time inform the management
+staff to replace the battery. Its structure is shown in Fig.
+
+2.
+sa MSP430F149
+eee _—
+Temperature Smoke sensor CO sensor
+sensor
+
+Fig.2 The Structure diagram of Wireless Complex Fire Detectior
+
+ 
+ 
+
+   
+ 
+
+   
+  
+
+2.2 Design of Center Console
+
+The Center console is used for receiving and
+transmitting data, according to received data, inquiry the
+GIS database and show location of the fire in the map of
+the building, at the same time, alarm through the sound,
+
+3-286
+
+ICEMI’2009
+
+light and GPRS module. It consists of ARM9 board,
+GPRS module, nRF2401 module and alarm, etc., It is
+
+shown in Fig.3.
+
+   
+   
+
+GPRS module
+
+Fig.3 the Structure Diagram of Center Console
+
+2.2.1 ARM9 board
+
+ARM9 board consists of Samsung’s S3C2440A, 3.5
+inch TFT, 64M SDRAM, 64M Nand Flash, 2M Nor
+Flash and four interfaces, etc, It 1s shown in Fig.4.
+S3C2440A is a cost-effective, low-power
+microcontroller solution in a small form factor. 3.5 inch
+TFT is LCD touch screen, is used for display the location
+of the fire. Nor Flash memory is used for BIOS; Nand
+Flash is used for installing the operating system
+
+WinCES.0.
+U
+
+ 
+   
+   
+ 
+
+   
+
+ 
+
+Alarm Interface
+GPRS Interface
+nRF2401 Interface
+
+  
+ 
+ 
+
+S3C2440A
+
+      
+
+SD Card Interface
+
+Fig.4 the Structure Diagram of ARM9 Board
+2.2.2 GPRS module
+
+General packet radio service (GPRS) is a packet
+switching technology for GSM _ networks. It's an
+advanced data transmission mode that does not require a
+continuous connection to the Internet, as with a standard
+home modem. Instead, GPRS uses the network only
+when there is data to be sent, which is more efficient. The
+&GSM Association& believes using GPRS will enable
+users to send and receive data at speeds up to 117 kbps,
+more than two times faster than with traditional home
+modems.
+
+In this design, Siemens MC55 embedded module is
+used for GPRS module, it supports GPRS & GSM
+network modes, The hardware interface uses standard
+RS232 serial port, through which transmits AT
+commands to the GPRS module, you can control the
+GPRS module easily.
+
+2.2.3 NRF 2401 module
+
+nRF2401A is the Industry's smallest, lowest cost,The Ninth International Conference on Electronic Measurement & Instruments
+
+lowest current consumption and low voltage supply
+2.4GHz RF transceiver. It provides global wireless
+equipment vendors with global 2.4GHz transceiver
+technology at the price and complexity of lower
+frequencies. The nRF2401A is a highly integrated
+component for wireless communication manufactured in
+an ultra modern 0.18um CMOS process. The entire
+transceiver including all inductors and filters is
+integrated in a single chip that gives the lowest cost
+solution to the end user. The only external components
+needed to make a complete RF system are a crystal and a
+resistor.
+
+In this design, wireless data transmission module use
+low-power nRF2401 module, the module power supply
+voltage: 1.9 - 3.6V, in the standby mode only 1pA,
+emission current is 12.3mA, receive current is 11.3mA.
+And each chip can be set 40-bit address through software,
+the built-in CRC error correction, error detection circuit
+and hardware and agreement, the development of
+software is very easily.
+
+IH] SOFTWARE DESIGN
+
+Software design, include wireless multi-sensor fire
+detector program design and center console software
+design. Wireless multi-sensor fire detector software is
+mainly responsible for collecting, processing,
+transmitting and receiving signals. Center console
+software design, including transplantation of the
+embedded system, Em GIS software, the
+
+GPRS
+
+serial
+
+communication program, communication
+
+program and alarm program.
+
+3.1 Wireless Multi-sensor Fire Detector Program Design
+
+Wireless multi-sensor fire detector acquires power
+density, CO density and
+temperature signals, then uses artificial neural network
+
+supply voltage, smoke
+algorithm (BP algorithm) to judge whether a fire breaks
+out. If there is a alarm signal, then transmit data to the
+center console. The detector also receives voltage
+detection signal, when receives a voltage detection signal,
+then acquires the voltage and transmit it. The flow-chart
+shown in Fig.5.
+
+3.2 Center Console Software Design
+
+As shown in Fig.6, the wireless transmission program
+will receive the fire alarm signal and transmit it to the
+center console through the serial program; center console
+uses Em GIS software to show the location of the fire
+broke out, at the same time, open the alarm and the
+indicator light begin to flash. The center console control
+GPRS module through the serial port to transmit alarm
+SMS. In Fig.6, the dotted line is stand for the process of
+
+ICEMI’2009
+
+receiving alarm signal, Solid line is stand for the process
+
+of transmitting alarm signal.
+
+ 
+        
+    
+
+(Voltage of the power
+
+System Start
+System Initiate
+
+  
+
+LED flash
+
+Data acquisition
+(Temperature
+Smoke density
+
+Data acquisition co density)
+
+supply)
+
+Fig.5 Flow-Chart of Wireless Multi-sensor Fire Detector software
+
+  
+   
+
+GPRS Control Code
+
+design
+
+Wireless alarm == Alarm code ---4
+'
+'
+
+GPRS Module
+
+Fig.6 Flow-Chart of Center Console Software
+
+The process of center console software design, as
+
+follows:
+A.
+
+Installed Windows CE5S.0 as operating system.
+Windows CE5.0 is a simple, efficient and
+multi-tasking operating system, which can be
+cut. It has its own system structure with
+independent development of the kernel and
+device driver model. It has the key part of
+Windows NT and Windows9X and supports
+more than 1400 most frequently used Win32
+API, using EVC (Embedded Visual C + +4.0),
+embedded software applications can _ be
+developed rapidly. The process of installing
+Windows CE5.0 as follows: (1) Division;
+(2)Install boot loader; (3)Install Eboot;
+(4)Install the kernel image of Windows CE5S.0;
+Using EVC (Microsoft Embedded Visual C +
++4.0) develop Em GIS software. Through Em
+GIS software, compare the signals that store in
+ARM9 board with the signals that the wireless
+module receives, shows the alarm type and the
+location of the fire broke out in the map; Em
+GIS software requires concise code, high
+reliability, small space storage; In order to
+improve system run speed, we have to store
+
+3-287ICEMI’2009
+
+The Ninth International Conference on Electronic Measurement & Instruments
+
+map data in a SD card;
+
+C. Compiling serial communication program.
+ARM9 through the serial port to transmit AT
+commands to GPRS module to transmit alarm
+SMS, however, there is no MSComm control
+in Windows CE5.0, so have to use Win32 API
+function to realize serial communication by
+writing class Cserial, open the serial port
+function: OpenPort (LPCTSTR Port , int
+Baudrate, int DataBits, int StopBits, int Parity,
+LPDataArriveProc proc = NULL, DWORD
+userdata = 0), ReadPort (char * data, int length)
+as a function of reading serial, WritePort (char
+* data, int length) as a function of writing serial;
+this function can be used to write AT
+commands to serial port and operate GPRS
+module;
+
+D. Compiling GPRS module control procedures.
+Making fire alarm’ signals and _ the
+corresponding location signal to embedded in a
+text message and transmits it to the fire
+department or management personnel, Writing
+Class CGPRSer to control GPRS module, AT +
+CMSS command is stand for transmit SMS
+from the memory, gprsSendMessage (CString
+strNum , CString strCon) as a function of
+transmitting SMS;
+
+E. Compiling alarm control procedures. Alarm
+control procedures is used for controlling
+alarm light and alarm, we have specially
+compile alarm drivers and the alarm control
+category, the function Led (Bool status) to
+control lights OFF, the function Alarm (Bool
+status) to control alarm opening and closing.
+
+IV CONCLUSION
+
+This system use ARM9 board for the center console,
+use nRF2401 module for wireless communication, use
+GPRS module for remote alarm. Develop Em GIS
+software for this System specifically, which not only can
+shows the location of the fire broke out, but also can
+control the GPRS remote alarm module. Compared with
+traditional fire detection alarm system, the system saves a
+lot cost of hardware and improves the efficiency of the
+fire detection alarm. It not only can make up for the
+limitations of wired fire detection system, when use in
+ancient buildings, temples, museums, etc., but also in
+family homes, villas, etc., the system will has wide
+applicable market and prospects.
+
+ACKNOWLEDGEMENTS
+
+The study was conducted under the Project
+08010302203 supported by S&T research project of
+Anhui Province. The authors would like to thank Mr.
+Shixing Liu and Mr. Jianxiong Zhu for their helps during
+the design.
+
+3-288
+
+[1]
+
+[2]
+
+[3]
+
+[4]
+
+[5]
+
+[6]
+
+[11]
+
+REFERENCES
+
+Wu _ Longbiao,Fang Jun,Xie Qiyuan. Fire detection and
+information processing[M]. Beijing: Chemical Industry Press,
+2006, 264-265(in Chinese)
+
+Chen nan. Design of Fire Detection and Control Systems for
+Intelligent Buildings[M]. Beijing: Tsinghua University Press,
+2001, 7: 19-60(in Chinese)
+
+Guo Jinbing,Guo Qiao,Cheng Xuewen. Research on Electro- map
+for PDA [J]. Computer&Digital Engineering. 2005, 33(7):
+21-23(in Chinese)
+
+Liu Xin, Chen Feng, Li Jin. Implementing Serial Communication
+in Windows CE [J]. Applications of the Computer Systems. 2003,
+2: 70-73(in Chinese)
+
+Liu Baifen,Zhang Yongxian,Gan Fangcheng,Wang Donghai.
+Design Intelligent Multi-sensor Fire Monitoring Based on DSP
+[C].The Eighth International Conference on _ Electronic
+Measurement and Instruments, Sian, China, 2007,(4): 799-804.
+Liu Xin, Chen Feng, Li Jin. Implementing Serial Communication
+in Windows CE [J]. Applications of the Computer Systems. 2003,
+2: 70-73(in Chinese)
+
+Tong Xiaohui,Gu Zenghui,Liu Jingao. The Design of SMS on
+PDA and Wireless Module[J]. Journal of East China Normal
+University(Nature Science). 2004, 4: 52-55(in Chinese)
+
+Zhu Xiaowu. Mobile GIS Development Based on WindowsCE{J].
+Applications of the Computer Systems .2002, 9: 9-12(in Chinese)
+Ding Yonghong ,Sun Yungiang. Design of wireless data transfer
+system based on nRF2401 [J]. Foreign Electronic Measurement
+Technology. 2008, 27(4): 45-47(in Chinese)
+
+Liu Shi-xing, Gu Qin-dong , Zhang Yong-ming, Qi Ning.
+Research on wireless fire monitoring network for historical
+buildings [J]. Fire Science and Technology. 2008, 27(4):
+258-261(in Chinese)
+
+Geng Xin-min, Sun Jin-zhong. Design of Wireless
+Communication System Based on ARM and GPRS{J].
+Instrumentation Technology. 2009, 1: 44-45,58(in Chinese)
