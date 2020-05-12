@@ -8,7 +8,7 @@ import numpy as np
 # If using Windows---
 # pytesseract.pytesseract.tesseract_cmd="C:\Program Files\Tesseract-OCR\\tesseract.exe"
 
-img = cv2.imread('12.jpg')
+img = cv2.imread('.jpg')
 
 text = pytesseract.image_to_string(img)
 
